@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+
+
+{% block content %}
+    <p>{{ post.datetime }}</p>
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.content }}</p>
+    <div>
+        <div><h3>Комментарии</h3>
+        {% load comments %}
+            {% render_comment_list for post %}
+        </div>
+
+        <div>
+        <h4>Добавить комментарий</h4>
+        {% render_comment_form for post %}</div>
+    </div>
+{% endblock %}
