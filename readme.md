@@ -8,8 +8,6 @@ Django version 1.10.1
 Now, consist from:
 - Blog posts
 - Post comments
-
-Working on:
 - User authorization
 
 ## INSTALLATION:
