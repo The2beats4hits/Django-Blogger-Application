@@ -1,0 +1,21 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+        <article class="post_preview">
+            <header class="post_meta">
+                <time pubdate datetime="{{ post.published_date }}" >{{ post.published_date }}</time>
+                <span class="owner">{{post.owner}}</span> 
+                {% if post.owner == user %}<a class="" href="{% url 'post_edit' pk=post.pk %}"> Отредактировать <span class="fa-pencil fa" aria-hidden="true"></span></a>{% else %} <i class="fa fa-user" aria-hidden="true"></i> {% endif %}
+            </header>
+            <h2>{{ post.title }}</h2>               
+            <p>{{ post.content|linebreaksbr }}</p>
+        </article>
+        <div><h3>Комментарии</h3>
+        {% load comments %}
+        {% render_comment_list for post %}
+        </div>
+
+        <div>
+            <h4>Добавить комментарий</h4>
+            {% render_comment_form for post %}</div>
+    </div>
+{% endblock %}

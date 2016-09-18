@@ -1,0 +1,12 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<h1>Добавить новую статью</h1>
+
+<form method="POST" class="edit_form">
+      {% csrf_token  %}
+        {{ form.as_p }}
+        <input id="save_post" type="submit" value="Сохранить" />
+</form>
+
+<a href="{% url 'list' %}">Вернуться к блогу</a>
+{% endblock %}

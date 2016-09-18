@@ -1,0 +1,104 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8" />
+        <title>Blog Example</title>
+        <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'bootstrap/css/bootstrap-responsive.min.css' %}" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+        <style>
+            body {
+                padding-top: 60px;  
+            }
+            .container {
+                width: 1200px;
+
+            }
+            .nav {
+                margin: 0 0 0 30px !important;
+            }
+
+            .auth_block {
+                float: left !important;
+                display: block;
+            }
+            span.auth_block {
+                padding: 10px 15px 10px;
+                color: #cdcdcd;
+            }
+            .auth_block_container {
+                float: right !important;
+            }
+            .auth_user {
+                font-weight: bold;
+                color: yellowgreen !important;
+            }
+
+            .post_preview time, .post_preview .owner{
+                padding: 1px;
+                font-weight: bold;
+            }
+            .post_preview time {
+                background-color: #333;
+            }
+            .post_preview .owner {
+                color: #333 !important;
+            }
+            .post_preview time{
+                color: white !important;                
+            }
+            input, textarea {
+                min-width: 300px;
+            }
+            .edit_form textarea, .edit_form input[type="text"] {
+                width: 800px;
+            }
+        </style>
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <script src="{% static 'bootstrap/js/bootstrap.min.js' %}" type="text/javascript"></script>
+        {% block extrahead %}
+        {% endblock %}
+        <script type="text/javascript">
+        $(function(){
+        {% block jquery %}
+        {% endblock %}
+        });
+        </script>
+    </head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container row-fluid">
+            <div class="brand span2">Blog Example </div>
+            <ul class="nav span10">
+                <li class="all_posts"><a href="{% url 'list' %}" >Все статьи</a></li>
+                <li class="auth_block_container">
+                    <span class="auth_block auth_user">{{ user }}</span>
+                    {% if user.is_anonymous %} <a href="{% url 'login' %}" class="auth_block">Войти</a> <span class="auth_block">или </span><a href="{% url 'register' %}" class="auth_block">Зарегестрироваться</a>
+                    {% else %} 
+                        <a href="{% url 'post_new' %}" class="auth_block">Написать статью</a>
+                        <a href="{% url 'my_posts' %}" class="auth_block">Мои статьи</a>
+                        <a href="{% url 'logout' %}" class="auth_block">Выйти</a>
+                    {% endif %}
+                </li>
+
+
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<div class="container">
+     <div class="row">
+         <div class="span8">{% block content %}Empty page{% endblock %}</div>
+         <div class="span4"></div>
+     </div>
+</div> <!-- container -->
+
+</body>
+</html>
