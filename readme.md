@@ -11,6 +11,7 @@ Now, consist from:
 - Blog posts
 - Post comments
 - User authorization
+
 In process:
 - User profiles
 - Localization
