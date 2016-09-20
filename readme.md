@@ -12,7 +12,7 @@ Now, consist from:
 - Post comments
 - User authorization
 
-In process:
+In progress:
 - User profiles
 - Localization
 
