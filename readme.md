@@ -11,6 +11,9 @@ Now, consist from:
 - Blog posts
 - Post comments
 - User authorization
+In process:
+- User profiles
+- Localization
 
 ## INSTALLATION:
 1. Install Python & Django
