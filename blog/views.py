@@ -34,14 +34,7 @@ class RegisterFormView(FormView):
         form.save()
 
         return super(RegisterFormView, self).form_valid(form)
-        success_url = "/login/"
 
-        template_name = "register.html"
-
-        def form_valid(self, form):
-            form.save()
-
-            return super(RegisterFormView, self).form_valid(form)
 
 class LoginFormView(FormView):
     form_class = AuthenticationForm
