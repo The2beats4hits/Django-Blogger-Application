@@ -1,20 +1,26 @@
+
+# AUTH
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
+#  HELPERS
 from django.core.exceptions import PermissionDenied
+from django.db import transaction
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.decorators import method_decorator
 from django.utils import timezone
 from django.urls import reverse
+from django.contrib import messages
+# GENERIC VIEWS
 from django.views.generic.base import View
 from django.views.generic.edit import FormView
 from django.views.generic import ListView, DetailView, CreateView
-# --------------------------------------------------------------------------------------
-from blog.models import Post
-from .forms import PostForm
+# APP MODELS
+from blog.models import Post, Profile
+# APP FORMS
+from .forms import PostForm, UserForm, ProfileForm
 
 
 class PostsListView(ListView):
@@ -112,3 +118,28 @@ def post_edit(request, pk):
         else:
             form = PostForm(instance=post)
         return render(request, 'blog/post_edit.html', {'form': form})
+
+@login_required
+@transaction.atomic
+def update_profile(request):
+    if request.method == 'POST':
+        user_form = UserForm(request.POST, instance=request.user)
+        profile_form = ProfileForm(request.POST, instance=request.user.profile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'Your profile was successfully updated!')
+            return redirect('profile')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        user_form = UserForm(instance=request.user)
+        profile_form = ProfileForm(instance=request.user.profile)
+    return render(request, 'profile_edit.html', {
+        'user_form': user_form,
+        'profile_form': profile_form
+    })
+
+@login_required
+def profile(request):
+    return render(request, 'profile.html')

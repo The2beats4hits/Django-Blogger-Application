@@ -77,9 +77,9 @@
         <div class="container row-fluid">
             <div class="brand span2">Blog Example </div>
             <ul class="nav span10">
-                <li class="all_posts"><a href="{% url 'list' %}" >Все статьи</a></li>
+                <li class="all_posts"><a href="{% url 'list' %}" >Последнее</a></li>
                 <li class="auth_block_container">
-                    <span class="auth_block auth_user">{{ user }}</span>
+                    <a href="{% url 'profile' %}" class="auth_block auth_user">{{ user }}</a>
                     {% if user.is_anonymous %} <a href="{% url 'login' %}" class="auth_block">Войти</a> <span class="auth_block">или </span><a href="{% url 'register' %}" class="auth_block">Зарегестрироваться</a>
                     {% else %} 
                         <a href="{% url 'post_new' %}" class="auth_block">Написать статью</a>

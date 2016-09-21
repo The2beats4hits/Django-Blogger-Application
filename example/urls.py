@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from blog.views import LoginFormView, RegisterFormView, LogoutView
+from blog import views
 from django.views.generic.base import RedirectView
 admin.autodiscover()
 
@@ -26,5 +27,6 @@ urlpatterns = [
     url(r'^login/$', LoginFormView.as_view(), name = "login"),
     url(r'^logout/$', LogoutView.as_view(), name = "logout"),
     url(r'^register/$', RegisterFormView.as_view(), name = "register"),
-
+    url(r'^profile/$', views.profile, name='profile'),
+    url(r'^profile_edit/$', views.update_profile, name="profile_edit"),
 ]

@@ -1,0 +1,14 @@
+{% extends "blog/base.html" %}
+{% block title %}Профиль{% endblock %}
+{% block content %}
+<h2>{{ user.get_full_name }}</h2>
+<a href="{% url 'profile_edit' %}">Изменить профиль</a>
+<ul>
+  <li>Никнэйм: {{ user.username }}</li>
+  <li>Местоположение: {{ user.profile.location }}</li>
+  <li>День рождения: {{ user.profile.birth_date }}</li>
+  <li>Биография: {{user.profile.bio}}</li>
+  <li>Язык: {{user.profile.lang}}</li>
+</ul>
+
+{% endblock %}
